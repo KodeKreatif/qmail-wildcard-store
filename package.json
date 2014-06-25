@@ -1,0 +1,27 @@
+{
+  "name": "qmail-wildcard-store",
+  "version": "0.0.1",
+  "description": "Stores incoming messages into maildirs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:KodeKreatif/qmail-wildcard-store.git"
+  },
+  "keywords": [
+    "qmail",
+    "maildir"
+  ],
+  "author": "Mohammad Anwari <mdamt@mdamt.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KodeKreatif/qmail-wildcard-store/issues"
+  },
+  "homepage": "https://github.com/KodeKreatif/qmail-wildcard-store",
+  "preferGlobal": "true",
+  "bin": {
+    "qmail-wildcard-store" : "index.js"
+  }
+}
