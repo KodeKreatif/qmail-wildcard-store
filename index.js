@@ -6,9 +6,9 @@ var os = require("os");
 // http://qmail.org/man/man8/qmail-command.html
 //
 
-var recipient = process.env["RECIPIENT"];
+var recipient = process.env["DEFAULT"] + "@" + process.env["HOST"];
 
-if (!recipient) {
+if (recipient == "@") {
   process.exit(111);
 }
 
