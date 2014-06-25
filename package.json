@@ -1,6 +1,6 @@
 {
   "name": "qmail-wildcard-store",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stores incoming messages into maildirs",
   "main": "index.js",
   "scripts": {
