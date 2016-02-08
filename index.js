@@ -32,7 +32,9 @@ var deliver = function() {
       fs.mkdirSync(name, 0700);
     }
     catch (e) {
-      process.exit(100);
+      if (e.code !== 'EEXIST') {
+         process.exit(100);
+      }
     }
   }
 
