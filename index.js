@@ -12,21 +12,43 @@ if (recipient == "@") {
   process.exit(111);
 }
 
+var toSpamFolder = (recipient.lastIndexOf('-spam') > 0);
+
 var targetDir = process.argv[2];
 
 if (!targetDir || targetDir[0] == "." || targetDir[0] == "/") {
   process.exit(111);
 }
 
-var dir = process.cwd() + "/" + targetDir + "/" + recipient;
+var spamDir = '.Spam';
+var dir = process.cwd() + "/" + targetDir + "/" + recipient.replace(/-spam@/, '@');
+var destination = toSpamFolder ? dir + '/' + spamDir : dir;
 
 var deliver = function() {
   // http://qmail.org/man/man5/maildir.html
-  
+
+  var mkdir = function(name) {
+    try {
+      fs.mkdirSync(name, 0700);
+    }
+    catch (e) {
+      process.exit(100);
+    }
+  }
+
+  var makeSpamFolder = function() {
+    mkdir(spamDir);
+    mkdir(spamDir + '/cur');
+    mkdir(spamDir + '/tmp');
+    mkdir(spamDir + '/new');
+  }
 
   var chdir = function() {
     try {
       process.chdir(dir);
+      if (toSpamFolder) {
+        makeSpamFolder();
+      }
     }
     catch (e) {
       process.exit(100);
@@ -36,7 +58,7 @@ var deliver = function() {
   var stat = function() {
     var fileName = (new Date()).valueOf() + "." + process.pid + "." + os.hostname();
     try {
-      var stat = fs.statSync(dir + "/tmp/" + fileName);
+      var stat = fs.statSync(destination + "/tmp/" + fileName);
     }
     catch (e) {
       return fileName;
@@ -45,10 +67,10 @@ var deliver = function() {
   }
 
   var write = function(fileName) {
-    var writeable = fs.createWriteStream(dir + "/tmp/" + fileName);
+    var writeable = fs.createWriteStream(destination + "/tmp/" + fileName);
     writeable.on("finish", function(){
-      fs.linkSync(dir + "/tmp/" + fileName, dir + "/new/" + fileName);
-      fs.unlinkSync(dir + "/tmp/" + fileName);
+      fs.linkSync(destination + "/tmp/" + fileName, destination + "/new/" + fileName);
+      fs.unlinkSync(destination + "/tmp/" + fileName);
     });
     process.stdin.pipe(writeable);
   }
