@@ -1,0 +1,82 @@
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	mailgw.omama.com
+X-Spam-Flag: YES
+X-Spam-Level: **************************************************
+X-Spam-Status: Yes, score=999.0 required=5.0 tests=ALL_TRUSTED,GTUBE,
+	HTML_MESSAGE autolearn=no version=3.3.2
+X-Spam-Report: 
+	* -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	* 1000 GTUBE BODY: Generic Test for Unsolicited Bulk Email
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+Received: (qmail 30787 invoked from network); 1 Mar 2016 05:20:35 -0000
+Received: from localhost (127.0.0.1)
+  by omamail.com with SMTP; 1 Mar 2016 05:20:35 -0000
+X-Virus-Scanned: Surelia amavisd-new at mailgw.omama.com
+Received: from unknown ([127.0.0.1])
+	by localhost (mailgw.omama.com [127.0.0.1]) (amavisd-new, port 10628)
+	id 4oUYQfOs6t9y for <nabilah@omamail.com>;
+	Tue,  1 Mar 2016 12:20:35 +0700 (WIB)
+Received: from unknown (HELO mailapp.omama.com) (10.31.2.78)
+  by omamail.com with SMTP; 1 Mar 2016 05:20:35 -0000
+Received: from mailapp.omama.com ([10.31.2.78] helo=[127.0.0.1])
+	by mailapp.omama.com with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA256:128)
+	(Exim 4.80)
+	(envelope-from <sonia@omamail.com>)
+	id 1aackW-0003dV-U9
+	for nabilah@omamail.com; Tue, 01 Mar 2016 12:21:32 +0700
+Content-Type: multipart/mixed;
+ boundary="----sinikael-?=_1-14568096929110.04616236570291221"
+From: sonia@omamail.com
+Sender: sonia@omamail.com
+To: nabilah@omamail.com
+Subject: Test
+Date: Tue, 01 Mar 2016 05:21:32 +0000
+Message-Id: <1456809692915-6fffcc45-01a215cd-1e6cb450@omamail.com>
+MIME-Version: 1.0
+
+------sinikael-?=_1-14568096929110.04616236570291221
+Content-Type: text/html
+Content-Transfer-Encoding: 7bit
+
+<p>Test</p>
+------sinikael-?=_1-14568096929110.04616236570291221
+Content-Type: text/plain; name=gtube.txt
+Content-Disposition: attachment; filename=gtube.txt
+Content-Transfer-Encoding: quoted-printable
+
+Subject: Test spam mail (GTUBE) --Moko
+Message-ID: <GTUBE1.1010101@example.=
+net>
+Date: Wed, 23 Jul 2003 23:30:00 +0200
+From: Sender <sender@example.=
+net>
+To: Recipient <recipient@example.net>
+Precedence: junk
+MIME-Version: 1.0
+Content-Type: text/plain; charset=3Dus-ascii
+Content-Transfer-Encoding: 7bit
+
+This is the GTUBE, the
+	Generic
+	Test for
+	Unsolicited
+	Bulk
+	Email
+
+If your spam filter supports it, the GTUBE =
+provides a test by which you
+can verify that the filter is installed =
+correctly and is detecting incoming
+spam. You can send yourself a test mail=
+ containing the following string of
+characters (in upper case and with no =
+white spaces and line breaks):
+
+XJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-=
+ANTI-UBE-TEST-EMAIL*C.34X
+
+You should send this test mail from an account =
+outside of your network.
+
+
+------sinikael-?=_1-14568096929110.04616236570291221--
