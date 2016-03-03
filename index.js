@@ -12,17 +12,15 @@ if (recipient == "@") {
   process.exit(111);
 }
 
-var toSpamFolder = (recipient.lastIndexOf('-spam') > 0);
-
 var targetDir = process.argv[2];
 
 if (!targetDir || targetDir[0] == "." || targetDir[0] == "/") {
   process.exit(111);
 }
 
-var spamDir = '.Spam';
 var dir = process.cwd() + "/" + targetDir + "/" + recipient.replace(/-spam@/, '@');
-var destination = toSpamFolder ? dir + '/' + spamDir : dir;
+var spamDir = dir + '/.Spam';
+var destination = dir;
 
 var deliver = function() {
   // http://qmail.org/man/man5/maildir.html
@@ -48,9 +46,6 @@ var deliver = function() {
   var chdir = function() {
     try {
       process.chdir(dir);
-      if (toSpamFolder) {
-        makeSpamFolder();
-      }
     }
     catch (e) {
       process.exit(100);
@@ -70,9 +65,38 @@ var deliver = function() {
 
   var write = function(fileName) {
     var writeable = fs.createWriteStream(destination + "/tmp/" + fileName);
+    var parsed = false;
+    var hasSpam = false;
+    var check = 'X-Spam-Flag: YES';
+
     writeable.on("finish", function(){
-      fs.linkSync(destination + "/tmp/" + fileName, destination + "/new/" + fileName);
+      if (hasSpam) {
+        makeSpamFolder();
+        fs.linkSync(destination + "/tmp/" + fileName, spamDir + "/new/" + fileName);
+      } else {
+        fs.linkSync(destination + "/tmp/" + fileName, destination + "/new/" + fileName);
+      }
       fs.unlinkSync(destination + "/tmp/" + fileName);
+    });
+    process.stdin.on('data', function(d) {
+      var last = '';
+      if (parsed === false) {
+        for (var i = 0; i < d.length; i ++) {
+          // found end of headers
+          if (last === 10 && d[i] === 10) {
+            parsed = true;
+            break;
+          } else if (d[i] === 88) { // 'X'
+            var x = d.slice(i, i + check.length);
+            if (x.toString() === check) {
+              hasSpam = true;
+              parsed = true;
+              break;
+            }
+          }
+          last = d[i];
+        }
+      }
     });
     process.stdin.pipe(writeable);
   }
